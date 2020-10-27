@@ -21,6 +21,6 @@ Entertainment
 Productivity
 
 ## Tags
-#Sassy bot
-#Baby helper
+#sassy-bot
+#baby-helper
 
