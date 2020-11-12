@@ -5,10 +5,10 @@ A sassy robot to help with baby's tasks
 This robot helps with babies tasks on a picroft via gpio. the robot is extra sassy just to liven the mood.
 
 ## Examples
-* "Rock niam"
-* "Start rocking niam"
-* "Could you please start rocking niam"
-* "Please start rocking niam"
+* "Rock baby"
+* "Start rocking baby"
+* "Could you please start rocking baby"
+* "Please start rocking baby"
 * "Status of the rocker"
 * "Activate rocker"
 
