@@ -12,7 +12,7 @@ class SassyBot(MycroftSkill):
     #     self.speak_dialog('bot.sassy')
 
     @intent_handler(IntentBuilder("RockerStatus").require("status").build())
-    def handle_bot_sassy(self, message):
+    def handle_rocker_status(self, message):
         if self.rocking == True:
             self.speak("Rocking is on")
         else:
@@ -29,7 +29,7 @@ class SassyBot(MycroftSkill):
 
     @intent_handler(IntentBuilder("StopRocker").require("stop").build())
     #@intent_handler('stop.intent')
-    def handle_start(self, message):
+    def handle_stop(self, message):
         if self.rocking == True:
             # add GPIO stop code here
             self.speak_dialog("stopped", data={"baby" : self.baby})
