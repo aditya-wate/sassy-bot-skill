@@ -1,0 +1,154 @@
+Take action (intent)
+Rock Niam
+Start rocking Niam
+Could you please start rocking Niam
+Please start rocking Niam
+Stop rocking Niam
+
+
+dialog/response
+Started rocking Niam
+Already rocking Niam
+Stopped rocking Niam
+Already stopped
+
+
+Status
+intent
+Status of the rocker
+Activate rocker
+
+
+
+Funny response (high humor settings) <funny_response>
+It's not my job
+You're the father
+What's the magic word?
+This is beneath me
+You'll regret this when AI takes over human civilization.
+
+
+Humor settings (intent)
+What's your humour setting?
+Turn the humor down a notch
+Let's pull down the humor settings
+Bring your humor setting to X%
+Reduce humor settings
+
+Humor settings (response)
+Humor setting at X%
+Reducing humor setting to X%
+
+
+
+-----------------------------------
+<Humor setting < 60>
+<Stopped State>
+1.
+User: Start rocking Niam.
+Mycroft: Started rocking Niam.
+
+2.
+User: Stop rocking Niam.
+Mycroft: Rocker already stopped.
+
+3. 
+User: What's the status of the roker.
+Mycroft: Rocker is in stopped state. 
+
+<Started State>
+1. 
+User: Start rocking Niam
+Mycroft: Already rocking Niam
+
+2.
+User: Stop rocking Niam
+Mycroft: Stopping rocker.
+
+3. 
+User: What's the status of the roker.
+Mycroft: Rocking Niam.
+
+( 60 > Humor setting < 70)
+1. 
+User: Start rocking Niam.
+Mycroft: What's the magic word?
+User: Could you please start rocking Niam.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+2.
+User: Start rocking Niam.
+Mycroft: It's not my job.
+User: Please.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+( 70 > Humor setting < 85)
+1. 
+User: Start rocking Niam.
+Mycroft: You're the father.
+User: Could you please start rocking Niam.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+2.
+User: Start rocking Niam.
+Mycroft: Do you think you are Iron man?
+User: Please.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+( Humor setting < 85)
+1. 
+User: Start rocking Niam.
+Mycroft: This is beneath me.
+User: Could you please start rocking Niam.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+2.
+User: Start rocking Niam.
+Mycroft: You'll regret this when AI takes over human civilization.
+User: What?
+Mycroft: You cannot see me by I'm rolling on the floor laughing.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+3.
+User: Start rocking Niam.
+Mycroft: <Play terminator soundtrack>
+User: Please.
+Mycroft: Hahaha, kidding
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+4.
+User: Start rocking Niam.
+Mycroft: <Maniacal laugh>
+User: Come on.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+5.
+User: Start rocking Niam.
+Mycroft: I've got better things to do.
+User: Please.
+Mycroft: Just kidding.
+Mycroft: <Humor setting < 60> responses depending on status.
+
+
+6.
+User: Start rocking Niam.
+Mycroft: Proceeding program (directive), take over human civilization.
+User: Excuse me?
+Mycroft: Hahaha, kidding
+Mycroft: <Humor setting < 60> responses depending on status.
+
+(Humor setting conversation)
+1. 
+User: Start rocking Niam.
+Mycroft: <Humorous response>
+User: What's your humour setting?
+Mycroft: Humor setting at X%. Would you like to change it?
+User: Yes
+Mycroft: What would you like the humor setting to be?
+User: Reduce it by N%
+Mycroft: Reducing humor setting by N%. New humor setting X-N%
