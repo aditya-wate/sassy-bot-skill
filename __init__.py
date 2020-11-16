@@ -1,6 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler, intent_handler
 from mycroft.skills.context import adds_context, removes_context
-
+from adapt.intent import IntentBuilder
 
 class SassyBot(MycroftSkill):
     def __init__(self):
