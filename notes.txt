@@ -97,7 +97,7 @@ User: Please.
 Mycroft: <Humor setting < 60> responses depending on status.
 
 
-( Humor setting < 85)
+( Humor setting > 85)
 1. 
 User: Start rocking Niam.
 Mycroft: This is beneath me.

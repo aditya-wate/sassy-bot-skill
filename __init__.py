@@ -20,25 +20,28 @@ class SassyBot(MycroftSkill):
             setting = SassyBot.MIN_SETTING
         return setting
 
-    def __update_setting(self, delta=0):
-        """
-            Update humor setting
-            Args:
-                delta (int): +n or -n; the change in percent
-            Returns: tuple(new setting int(0..100),
-                        setting changed flag (boolean))
-        """
-        old_setting = self.humor_setting
-        new_setting = self.__bound_setting(old_setting + delta)
-        self.humor_setting = new_setting
-        return new_setting, new_setting != old_setting
-
-    def __ack_humor_update(self, message, new_setting, changed):
-        if changed:
-            self.speak_dialog('humor.setting', data={'humor_level': new_setting})
+    def start_rocker(self, message):
+        if self.rocking == False:
+            # add GPIO start code here
+            self.rocking = True
+            self.speak_dialog("started", data={"baby" : self.baby})
         else:
-            self.speak_dialog('already.max.setting', data={'humor_level': new_setting})
+            self.speak_dialog("status", data={"status" : "started", "baby": self.baby})
 
+    @intent_handler(IntentBuilder("SetHumor").require("humor.setting")
+                    .optionally("increase").optionally("decrease")
+                    .optionally("to").require("percent"))
+    def handle_set_humor_absolute(self, message):
+        percent = extract_number(message.data['utterance'].replace('%', ''))
+        self.humor_setting = self.__bound_setting(int(percent))
+        self.speak_dialog('humor.setting', data={'humor_level': percent})
+
+    @intent_handler(IntentBuilder("QueryHumor").optionally("query")
+                .require("humor.setting"))
+    def handle_query_humor_setting(self, message):
+        settings = self.humor_setting
+        self.speak_dialog('humor.setting', data={'humor_level': settings})
+    
     @intent_handler(IntentBuilder("RockerStatus").require("status").build())
     def handle_rocker_status(self, message):
         if self.rocking == True:
@@ -46,29 +49,42 @@ class SassyBot(MycroftSkill):
         else:
             self.speak("Rocker in stopped state.")
 
-    @intent_handler(IntentBuilder("StartRocker").require("start").build())
+    @intent_handler(IntentBuilder("SassyBot").require("start").build())
+    def handle_sassy_bot(self, message):
+        if self.humor_setting >= 85:
+            self.speak_dialog('high.humor')
+        elif 75 <= self.humor_setting < 85:
+            self.speak_dialog('medium.humor')
+        elif 60 <= self.humor_setting < 75:
+            self.speak_dialog('low.humor')
+        else:
+            self.start_rocker(message)
+        self.set_context('start_resp')
+
+    @intent_handler(IntentBuilder("StartRocker").require("start_resp").require("please").build())
     #@intent_handler('start.intent')
     def handle_start(self, message):
-        if self.rocking == False:
-            # add GPIO start code here
-            self.speak_dialog("started", data={"baby" : self.baby})
-        else:
-            self.rocking = True
-            self.speak_dialog("status", data={"status" : "started", "baby": self.baby})
+        self.speak("Fine.")
+        self.start_rocker(message)
 
     @intent_handler(IntentBuilder("StopRocker").require("stop").build())
     #@intent_handler('stop.intent')
     def handle_stop(self, message):
         if self.rocking == True:
             # add GPIO stop code here
+            self.rocking = False
             self.speak_dialog("stopped", data={"baby" : self.baby})
         else:
-            self.rocking = False
             self.speak_dialog("status", data={"status" : "stopped", "baby": self.baby})
 
     def initialize(self):
         self.humor_setting = self.settings.get('humor_level', 60)
         self.baby = self.settings.get('baby_name', 'Niam')
+    
+    def stop(self):
+        # GPIO to stop rocker
+        self.rocking = False
+        self.speak_dialog("stopped", data={"baby" : self.baby})
 
 def create_skill():
     return SassyBot()
