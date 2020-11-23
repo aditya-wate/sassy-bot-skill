@@ -11,7 +11,7 @@ class SassyBot(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.rocking = False
-        self.humor_setting = self.settings.get('humor_level', 60)
+        self.humor_setting = 60
 
     @staticmethod
     def __bound_setting(setting):

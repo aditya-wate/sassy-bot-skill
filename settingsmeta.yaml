@@ -1,12 +1,6 @@
 
 skillMetadata:
   sections:
-    - name: Humor Settings
-      fields:
-        - name: humor_level
-          type: number
-          label: Humor setting (between 0-100)
-          value: "60"
     - name: Baby Info
       fields:
         - name: baby_name
