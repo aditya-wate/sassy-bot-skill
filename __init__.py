@@ -11,6 +11,7 @@ class SassyBot(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
         self.rocking = False
+        self.humor_setting = self.settings.get('humor_level', 60)
 
     @staticmethod
     def __bound_setting(setting):
@@ -78,7 +79,6 @@ class SassyBot(MycroftSkill):
             self.speak_dialog("status", data={"status" : "stopped", "baby": self.baby})
 
     def initialize(self):
-        self.humor_setting = self.settings.get('humor_level', 60)
         self.baby = self.settings.get('baby_name', 'Niam')
     
     def stop(self):
