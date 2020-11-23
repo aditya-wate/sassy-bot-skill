@@ -31,7 +31,7 @@ class SassyBot(MycroftSkill):
 
     @intent_handler(IntentBuilder("SetHumor").require("humor.setting")
                     .optionally("increase").optionally("decrease")
-                    .require("to").require("percent"))
+                    .require("to").optionally("percent"))
     def handle_set_humor_absolute(self, message):
         percent = extract_number(message.data['utterance'].replace('%', ''))
         self.humor_setting = self.__bound_setting(int(percent))
