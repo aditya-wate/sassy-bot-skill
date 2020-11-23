@@ -37,7 +37,7 @@ class SassyBot(MycroftSkill):
         self.humor_setting = self.__bound_setting(int(percent))
         self.speak_dialog('humor.setting', data={'humor_level': percent})
 
-    @intent_handler(IntentBuilder("QueryHumor").optionally("query")
+    @intent_handler(IntentBuilder("QueryHumor").require("query")
                 .require("humor.setting"))
     def handle_query_humor_setting(self, message):
         settings = self.humor_setting
