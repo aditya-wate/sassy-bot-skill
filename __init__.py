@@ -2,6 +2,7 @@ from mycroft import MycroftSkill, intent_file_handler, intent_handler
 from mycroft.skills.context import adds_context, removes_context
 from adapt.intent import IntentBuilder
 from mycroft.util.parse import extract_number
+import stepper
 
 class SassyBot(MycroftSkill):
 
@@ -24,6 +25,7 @@ class SassyBot(MycroftSkill):
     def start_rocker(self, message):
         if self.rocking == False:
             # add GPIO start code here
+            stepper.start()
             self.rocking = True
             self.speak_dialog("started", data={"baby" : self.baby})
         else:
@@ -73,6 +75,7 @@ class SassyBot(MycroftSkill):
     def handle_stop(self, message):
         if self.rocking == True:
             # add GPIO stop code here
+            stepper.stop()
             self.rocking = False
             self.speak_dialog("stopped", data={"baby" : self.baby})
         else:
@@ -80,9 +83,11 @@ class SassyBot(MycroftSkill):
 
     def initialize(self):
         self.baby = self.settings.get('baby_name', 'Niam')
+        self.log.info("Baby name: %s" % self.baby)
     
     def stop(self):
         # GPIO to stop rocker
+        stepper.stop()
         self.rocking = False
         self.speak_dialog("stopped", data={"baby" : self.baby})
 
