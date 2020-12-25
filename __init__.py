@@ -2,6 +2,9 @@ from mycroft import MycroftSkill, intent_file_handler, intent_handler
 from mycroft.skills.context import adds_context, removes_context
 from adapt.intent import IntentBuilder
 from mycroft.util.parse import extract_number
+from os.path import dirname, abspath
+import sys
+sys.path.append(abspath(dirname(__file__)))
 import stepper
 
 class SassyBot(MycroftSkill):
