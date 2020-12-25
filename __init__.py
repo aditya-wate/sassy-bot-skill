@@ -93,4 +93,3 @@ class SassyBot(MycroftSkill):
 
 def create_skill():
     return SassyBot()
-
