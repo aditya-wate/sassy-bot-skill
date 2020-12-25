@@ -16,6 +16,8 @@ class SassyBot(MycroftSkill):
         MycroftSkill.__init__(self)
         self.rocking = False
         self.humor_setting = 60
+        self.baby = 'Niam'
+        
 
     @staticmethod
     def __bound_setting(setting):
@@ -28,9 +30,9 @@ class SassyBot(MycroftSkill):
     def start_rocker(self, message):
         if self.rocking == False:
             # add GPIO start code here
-            stepper.start()
-            self.rocking = True
             self.speak_dialog("started", data={"baby" : self.baby})
+            self.rocking = True
+            stepper.start()
         else:
             self.speak_dialog("status", data={"status" : "started", "baby": self.baby})
 
@@ -78,21 +80,20 @@ class SassyBot(MycroftSkill):
     def handle_stop(self, message):
         if self.rocking == True:
             # add GPIO stop code here
-            stepper.stop()
             self.rocking = False
             self.speak_dialog("stopped", data={"baby" : self.baby})
+            stepper.stop()
         else:
             self.speak_dialog("status", data={"status" : "stopped", "baby": self.baby})
 
     def initialize(self):
-        self.baby = self.settings.get('baby_name', 'Niam')
         self.log.info("Baby name: %s" % self.baby)
     
     def stop(self):
         # GPIO to stop rocker
-        stepper.stop()
         self.rocking = False
         self.speak_dialog("stopped", data={"baby" : self.baby})
-
+        stepper.stop()
+        
 def create_skill():
     return SassyBot()

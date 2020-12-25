@@ -32,8 +32,8 @@ if is_imported:
     LOG.info("GPIO Setup Complete.")
 
 
-durationFwd = 1600 # Forward spin duration
-durationBwd = 1600 # Reverse spin duration
+durationFwd = 400 # Forward spin duration (full rotation 1600)
+durationBwd = 400 # Reverse spin duration
 delay = 0.0000001 # Delay between PUL.
 
 
@@ -70,6 +70,7 @@ def run():
     # TODO: this loop needs to be killed on stop()
     count = 0
     # while True: # TODO: Original logic to be implemented
+    # below will cause rocker state sync issues after loop finishes
     while count <= 10: # can't risk infinite loop yet
         if GPIO.input(ENA):
             forward()
