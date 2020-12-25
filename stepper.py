@@ -70,7 +70,7 @@ def run():
     # TODO: this loop needs to be killed on stop()
     count = 0
     # while True: # TODO: Original logic to be implemented
-    while count >= 10: # can't risk infinite loop yet
+    while count <= 10: # can't risk infinite loop yet
         if GPIO.input(ENA):
             forward()
             reverse()
@@ -90,4 +90,3 @@ def start():
 def stop():
     GPIO.output(ENA, GPIO.LOW)
     LOG.info("Stopping stepper...")
-    
