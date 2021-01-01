@@ -77,7 +77,6 @@ def run():
             reverse()
             count += 1
         else:
-            GPIO.cleanup()
             break
 
 def start():
@@ -91,3 +90,8 @@ def start():
 def stop():
     GPIO.output(ENA, GPIO.LOW)
     LOG.info("Stopping stepper...")
+
+
+def cleanup():
+    GPIO.cleanup()
+    LOG.info("Cleanup for stepper...")
