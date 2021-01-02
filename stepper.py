@@ -17,6 +17,7 @@ except:
 PUL = 17  # Driver pulse
 DIR = 27  # Driver direction
 ENA = 22  # Driver enable
+LED = 18  # Indicator
 
 
 if is_imported:
@@ -28,13 +29,16 @@ if is_imported:
     LOG.info("PUL = GPIO 27")
     GPIO.setup(ENA, GPIO.OUT)
     LOG.info("PUL = GPIO 22")
+    GPIO.setup(LED, GPIO.OUT)
+    LOG.info("PUL = GPIO 18")
+
 
     LOG.info("GPIO Setup Complete.")
 
 
-durationFwd = 400 # Forward spin duration (full rotation 1600)
-durationBwd = 400 # Reverse spin duration
-delay = 0.0000001 # Delay between PUL.
+durationFwd = 200 # Forward spin duration (full rotation 1600)
+durationBwd = 200 # Reverse spin duration
+delay = 0.0000002 # Delay between PUL.
 
 
 def forward():
@@ -43,11 +47,13 @@ def forward():
     LOG.info("DIR set to LOW")
 
     LOG.info("Rotating CW")
+    GPIO.output(LED, GPIO.HIGH)
     for x in range(durationFwd): 
         GPIO.output(PUL, GPIO.HIGH)
         sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         sleep(delay)
+    GPIO.output(LED, GPIO.LOW)
     sleep(.5) # TODO: needs to be removed
     return
 
@@ -58,11 +64,13 @@ def reverse():
     LOG.info("DIR set to HIGH")
 
     LOG.info("Rotating CCW")
+    GPIO.output(LED, GPIO.HIGH)
     for y in range(durationBwd):
         GPIO.output(PUL, GPIO.HIGH)
         sleep(delay)
         GPIO.output(PUL, GPIO.LOW)
         sleep(delay)
+    GPIO.output(LED, GPIO.LOW)
     sleep(.5) # TODO: needs to be removed
     return
 
@@ -73,8 +81,8 @@ def run():
     # below will cause rocker state sync issues after loop finishes
     while count <= 10: # can't risk infinite loop yet
         if GPIO.input(ENA):
-            forward()
             reverse()
+            forward()
             count += 1
         else:
             break
